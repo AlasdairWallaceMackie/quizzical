@@ -10,13 +10,18 @@ export default function Quiz(){
         return (
             <Question
                 key={index}
+                id={index}
                 question={question.question}
                 correct_answer={question.correct_answer}
                 incorrect_answers={question.incorrect_answers}
-                type={question.type}
             />
         )
     })
+
+    function checkAnswers(event){
+        console.log("PLACEHOLDER - Checking answers")
+        event.preventDefault()
+    }
 
     React.useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5&encode=base64")
@@ -46,12 +51,12 @@ export default function Quiz(){
     }, [])
 
     return (
-        <div id="quiz" className="p-3">
+        <form id="quiz" className="p-3">
             <div id="question-list">
                 {questionElements}
             </div>
 
-            <button className="btn btn-lg btn-success">SUBMIT</button>
-        </div>
+            <button onClick={event => checkAnswers(event)} className="btn btn-lg btn-primary">SUBMIT</button>
+        </form>
     )
 }
