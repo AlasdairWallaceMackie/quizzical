@@ -19,7 +19,7 @@ export default function Question(props){
     })
 
     React.useEffect(() => {
-        const newArray = props.incorrect_answers
+        const newArray = [...props.incorrect_answers]
         let rand = Math.floor( Math.random() * newArray.length )
         
         newArray.splice(rand, 0, props.correct_answer)
