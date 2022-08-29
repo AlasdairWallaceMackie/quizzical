@@ -4,8 +4,6 @@ import React from "react"
 import Question from "./Question"
 
 export default function Quiz(){
-    // console.log("Render Quiz")
-
     const [gameReset, setGameReset] = React.useState(false)
     const [numCorrect, setNumCorrect] = React.useState(0)
     const [revealAnswers, setRevealAnswers] = React.useState(false)
@@ -28,7 +26,6 @@ export default function Quiz(){
     })
 
     function handleSelectAnswer(questionId, answer){
-        // console.log(`ID: ${questionId}\nAnswer: ${answer}`)
 
         setQuestions(prevQuestions => prevQuestions.map(question => {
             return question.id === questionId ? 
@@ -41,7 +38,6 @@ export default function Quiz(){
         let count = 0
 
         questions.forEach(question => {
-            // console.log(`${question.id}: ${question.selectedAnswer}`)
             if (question.selectedAnswer === question.correct_answer)
                 count += 1
         })
@@ -55,13 +51,10 @@ export default function Quiz(){
     }
 
     React.useEffect(() => {
-        // console.log("Before:" + questions)
         setGameReset(prevState => prevState=false)
         setNumCorrect(prevState => prevState=0)
         setRevealAnswers(prevState => prevState=false)
-        // setQuestions(prevState => prevState=[])
     
-        // console.log("Reset: " + questions)
 
 
         fetch("https://opentdb.com/api.php?amount=5&encode=base64")
@@ -69,7 +62,6 @@ export default function Quiz(){
             .then(result => {
                 
                 const resultsArray = result.results
-                // console.log(resultsArray)
 
                 //Finds each string in results, decodes from ASCII to binary
                 resultsArray.forEach((question, index) => {
@@ -92,12 +84,7 @@ export default function Quiz(){
                 setQuestions(prevState => prevState = resultsArray)
             })
 
-        // console.log("After: " + questions)
     }, [gameReset])
-
-    // React.useEffect(() => {
-    //     console.log("Questions reset")
-    // }, [questions])
 
     return (
         <div id="quiz" className="p-3">

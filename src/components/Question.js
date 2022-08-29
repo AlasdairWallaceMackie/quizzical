@@ -2,27 +2,19 @@ import React from "react"
 import redX from "../redX.png"
 
 export default function Question(props){
-    // console.log("Rendering Question")
-    // console.log("props.revealAnswers " + props.revealAnswers)
-    // console.log("Opposite " + !props.revealAnswers)
 
     const [answerArray, setAnswerArray] = React.useState([])
-    // const [showX, setShowX] = React.useState(false)
-    let showX = false
     const answerButtons = answerArray.map((answer, index) => {
-        let colorClass = "btn-outline-secondary"
+        const id = `question-${props.id}-answer-${index}`
         
+        let colorClass = "btn-outline-secondary"
         if (props.revealAnswers === true){
             if (answer.isCorrect)
                 colorClass = "btn-success"
             else if (props.selected_answer === answer.value)
                 colorClass = "btn-danger"
-                // setShowX(prevState => prevState = true)
-                showX = true
         }
 
-        const id = `question-${props.id}-answer-${index}`
-        
         return (
             <>
                 <input
@@ -43,11 +35,8 @@ export default function Question(props){
     })
 
     React.useEffect(() => {
-        console.log("Question useEffect")
         setAnswerArray(prevState => prevState = [])
         
-        // console.log("Answer array reset: " + JSON.stringify(answerArray))
-
         const newArray = props.incorrect_answers.map(answer => (
             {
                 value: answer,
@@ -59,7 +48,6 @@ export default function Question(props){
         newArray.splice(rand, 0, {value: props.correct_answer, isCorrect: true})
         
         setAnswerArray(prevState => prevState = newArray)
-        // console.log("Answer array new: " + JSON.stringify(answerArray))
     }, [props.gameReset])
 
     return (
