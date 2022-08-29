@@ -1,3 +1,14 @@
 hr{
     border: 1px solid white
 }
+
+.disable-clicks{
+    pointer-events: none;
+}
+
+.red-x{
+    height: 20px;
+    filter: 
+        drop-shadow(1px 1px 5px rgb(235, 91, 225))
+        drop-shadow(-1px -1px 5px rgb(235, 91, 225));
+}
